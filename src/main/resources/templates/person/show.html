@@ -1,0 +1,64 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
+</head>
+<body style="padding-left: 250px; padding-right: 250px; padding-top: 100px;background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+">
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                ID
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Birth Date
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th th:text="${person.getId()}" scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Id
+            </th>
+            <td th:text="${person.getFullName()}" class="px-6 py-4">
+                Name
+            </td>
+            <td th:text="${person.getBirthDate()}" class="px-6 py-4">
+                Birth Date
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                Books Taken
+            </th>
+        </tr>
+        </thead>
+        <tbody th:each="book: ${books}">
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td th:text="${book.getName()}" class="px-6 py-4">
+                Birth Date
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+</html>

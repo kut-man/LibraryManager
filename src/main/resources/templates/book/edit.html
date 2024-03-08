@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
+</head>
+<body style="padding: 200px;">
+
+<form th:method="PATCH" th:action="@{/book/{id}(id=${book.getId()})}" th:object="${book}" class="max-w-md mx-auto">
+    <div class="relative z-0 w-full mb-5 group">
+        <input name="name" id="name" type="text" th:field="*{name}"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+        <div class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+             th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Message
+        </div>
+    </div>
+
+    <div class="relative z-0 w-full mb-5 group">
+        <input name="author" id="author" type="text" th:field="*{author}"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+        <div class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+             th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error Message
+        </div>
+    </div>
+
+    <div class="relative z-0 w-full mb-5 group">
+        <input name="year" id="year" type="number" th:field="*{year}"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+        <div class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+             th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error Message
+        </div>
+    </div>
+
+    <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Submit
+    </button>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+</html>

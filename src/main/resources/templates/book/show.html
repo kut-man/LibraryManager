@@ -1,0 +1,87 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
+</head>
+<body style="padding-left: 250px; padding-right: 250px; padding-top: 100px;background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+">
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                ID
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Author
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Year
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Person ID
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Actions
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th th:text="${book.getId()}" scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                ID
+            </th>
+            <td th:text="${book.getName()}" class="px-6 py-4">
+                Name
+            </td>
+            <td th:text="${book.getAuthor()}" class="px-6 py-4">
+                Author
+            </td>
+            <td th:text="${book.getYear()}" class="px-6 py-4">
+                Book Year
+            </td>
+            <td class="px-6 py-4"
+                th:text="${assignedPerson != null} ? ${assignedPerson} : 'Available'">Person
+                ID
+            </td>
+            <td>
+                <form th:if="${book.getPersonId() == null}" th:method="PATCH"
+                      th:action="@{/book/{id}/assign(id=${book.getId()})}" th:object="${book}"
+                      class="flex max-w-sm mb-0">
+                    <select id="people"
+                            th:field="*{personId}"
+                            style="height: min-content; width: 50%"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option th:each="person: ${people}" th:value="${person.getId()}"
+                                th:text="${person.getFullName()}"></option>
+                    </select>
+                    <button type="submit"
+                            style="width: 50%"
+                            class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 my-0">
+                        Set Person
+                    </button>
+                </form>
+
+
+                <form th:if="${book.getPersonId() != null}" th:method="PATCH"
+                      th:action="@{/book/{id}/freed(id=${book.getId()})}" class="max-w-sm mb-0">
+                    <button type="submit"
+                            class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-0">
+                        Make Available
+                    </button>
+                </form>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+</html>

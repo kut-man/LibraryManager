@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
+</head>
+<body style="padding-top: 10px;background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+">
+<div class="flex justify-center">
+    <a th:href="@{/people}">
+        <button type="button"
+                class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 my-6">
+            Show People
+        </button>
+    </a>
+</div>
+<table style="margin: auto;" class="w-fit text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+        <th scope="col" class="px-6 py-3">
+            Name
+        </th>
+        <th scope="col" class="px-6 py-3">
+            Author
+        </th>
+        <th scope="col" class="px-6 py-3">
+            Year
+        </th>
+        <th scope="col" class="px-6 py-3">
+            Actions
+        </th>
+    </tr>
+    </thead>
+    <tbody th:each="book: ${books}">
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <td class="px-6 py-4">
+            <a th:text="${book.getName()}" th:href="@{/book/{id}(id=${book.getId()})}">
+                Name
+            </a>
+        </td>
+        <td th:text="${book.getAuthor()}" class="px-6 py-4">
+            Author
+        </td>
+        <td th:text="${book.getYear()}" class="px-6 py-4">
+            Author
+        </td>
+        <td class="px-6 py-4">
+            <a th:href="@{/book/{id}/edit(id=${book.getId()})}">
+                <button type="button"
+                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
+                    Edit
+                </button>
+            </a>
+            <form style="display: inline" th:method="DELETE" th:action="@{/book/{id}(id=${book.getId()})}">
+                <button type="submit"
+                        class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="flex justify-center gap-2">
+    <a th:href="@{/book/new}">
+        <button type="button"
+                class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 my-6">
+            Add New
+        </button>
+    </a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+</html>
