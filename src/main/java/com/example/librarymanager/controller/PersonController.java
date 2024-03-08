@@ -1,9 +1,9 @@
-package com.example.firstproject.controller;
+package com.example.librarymanager.controller;
 
-import com.example.firstproject.dao.BookDAO;
-import com.example.firstproject.dao.PersonDAO;
-import com.example.firstproject.model.Person;
-import com.example.firstproject.util.PersonValidator;
+import com.example.librarymanager.dao.BookDAO;
+import com.example.librarymanager.dao.PersonDAO;
+import com.example.librarymanager.model.Person;
+import com.example.librarymanager.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

@@ -1,10 +1,10 @@
-package com.example.firstproject;
+package com.example.librarymanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FirstProjectApplicationTests {
+class LibraryManagerSpringApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,4 +1,4 @@
-package com.example.firstproject;
+package com.example.librarymanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,16 +11,16 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-public class FirstProjectApplication {
+public class LibraryManagerSpringApplication {
 
     private final Environment environment;
 
-    public FirstProjectApplication(Environment environment) {
+    public LibraryManagerSpringApplication(Environment environment) {
         this.environment = environment;
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(FirstProjectApplication.class, args);
+        SpringApplication.run(com.example.librarymanager.LibraryManagerSpringApplication.class, args);
     }
 
     @Bean

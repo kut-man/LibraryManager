@@ -1,8 +1,8 @@
-package com.example.firstproject.controller;
+package com.example.librarymanager.controller;
 
-import com.example.firstproject.dao.BookDAO;
-import com.example.firstproject.dao.PersonDAO;
-import com.example.firstproject.model.Book;
+import com.example.librarymanager.dao.BookDAO;
+import com.example.librarymanager.dao.PersonDAO;
+import com.example.librarymanager.model.Book;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

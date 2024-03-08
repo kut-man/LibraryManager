@@ -1,4 +1,4 @@
-package com.example.firstproject.model;
+package com.example.librarymanager.model;
 
 import jakarta.validation.constraints.*;
 

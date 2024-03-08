@@ -1,6 +1,6 @@
-package com.example.firstproject.dao;
+package com.example.librarymanager.dao;
 
-import com.example.firstproject.model.Person;
+import com.example.librarymanager.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

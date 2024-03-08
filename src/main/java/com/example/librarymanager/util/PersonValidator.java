@@ -1,7 +1,7 @@
-package com.example.firstproject.util;
+package com.example.librarymanager.util;
 
-import com.example.firstproject.dao.PersonDAO;
-import com.example.firstproject.model.Person;
+import com.example.librarymanager.dao.PersonDAO;
+import com.example.librarymanager.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
