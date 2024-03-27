@@ -1,22 +1,33 @@
 package com.example.librarymanager.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+import java.util.List;
+
+@Entity
 public class Person {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "full_name")
     @NotEmpty(message = "Your full name is empty")
     @Pattern(regexp = "(?=.{1,50}$)[A-Z][a-zA-Z]* [A-Z][a-zA-Z]*$", message = "Your name should be in the following format: Name Surname")
     private String fullName;
-    @NotEmpty(message = "Fill your birth date")
-    @Pattern(regexp = "(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/(19\\d{2}|20\\d{2})$", message = "Date Should in in this format: MM/DD/YYYY")
-    private String birthDate;
 
-    public Person(String fullName, String birthDate) {
+    @Column(name = "birth_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private Date birthDate;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    public Person(String fullName, Date birthDate) {
         this.fullName = fullName;
         this.birthDate = birthDate;
     }
@@ -39,11 +50,19 @@ public class Person {
         this.fullName = fullName;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

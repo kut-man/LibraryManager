@@ -1,8 +1,7 @@
 package com.example.librarymanager.controller;
-
-import com.example.librarymanager.dao.BookDAO;
-import com.example.librarymanager.dao.PersonDAO;
 import com.example.librarymanager.model.Person;
+import com.example.librarymanager.services.BooksService;
+import com.example.librarymanager.services.PeopleService;
 import com.example.librarymanager.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,20 +16,20 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/people")
 public class PersonController {
 
-    private final PersonDAO personDAO;
-    private final BookDAO bookDAO;
+    private final PeopleService peopleService;
+    private final BooksService booksService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PersonController(PersonDAO personDAO, BookDAO bookDAO, PersonValidator personValidator) {
-        this.personDAO = personDAO;
-        this.bookDAO = bookDAO;
+    public PersonController(PeopleService peopleService, BooksService booksService, PersonValidator personValidator) {
+        this.peopleService = peopleService;
+        this.booksService = booksService;
         this.personValidator = personValidator;
     }
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("people", personDAO.showAll());
+        model.addAttribute("people", peopleService.showAll());
         return "person/people";
     }
 
@@ -44,38 +43,39 @@ public class PersonController {
     public String insert(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
         personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) return "person/new";
-        personDAO.save(person);
+        peopleService.save(person);
         return "redirect:/people";
     }
 
     @GetMapping("/{id}")
     public String showPerson(@PathVariable("id") int id, Model model) {
-        if (personDAO.find(id) == null) {
+        if (peopleService.find(id) == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "entity not found"
             );
         }
-        model.addAttribute("person", personDAO.find(id));
-        model.addAttribute("books", bookDAO.findPerson(id));
+        Person person = peopleService.find(id);
+        model.addAttribute("person", person);
+        model.addAttribute("books", person.getBooks());
         return "person/show";
     }
 
     @GetMapping("/{id}/edit")
     public String editPerson(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personDAO.find(id));
+        model.addAttribute("person", peopleService.find(id));
         return "person/edit";
     }
 
     @PatchMapping("/{id}")
     public String change(@PathVariable("id") int id, @ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "person/edit";
-        personDAO.update(id, person);
+        peopleService.update(id, person);
         return "redirect:/people";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        personDAO.delete(id);
+        peopleService.delete(id);
         return "redirect:/people";
     }
 }
