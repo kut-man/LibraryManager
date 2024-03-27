@@ -3,6 +3,7 @@ package com.example.librarymanager.services;
 import com.example.librarymanager.model.Book;
 import com.example.librarymanager.repositories.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +39,7 @@ public class BooksService {
         return booksRepository.findById(id).orElse(null);
     }
 
-    public List<Book> findPerson(int id) {
-        if (booksRepository.findById(id).isEmpty()) return null;
-        return booksRepository.findByOwner(booksRepository.findById(id).get().getOwner());
+    public List<Book> showAllSortedByYear() {
+        return booksRepository.findAll(Sort.by("year"));
     }
 }

@@ -23,8 +23,9 @@ public class BookController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("books", booksService.showAll());
+    public String index(Model model, @RequestParam(name = "sort_by_year", required = false, defaultValue = "false") boolean sortByYear) {
+        if(sortByYear) model.addAttribute("books", booksService.showAllSortedByYear());
+        else model.addAttribute("books", booksService.showAll());
         return "book/books";
     }
 
@@ -46,7 +47,7 @@ public class BookController {
         Book book = booksService.find(id);
         model.addAttribute("book", book);
         model.addAttribute("people", peopleService.showAll());
-        String assignedPerson = book.getOwner() == null ? null : peopleService.find(book.getOwner().getId()).getFullName();
+        String assignedPerson = book.getOwner() == null ? null : book.getOwner().getFullName();
         model.addAttribute("assignedPerson", assignedPerson);
         return "book/show";
     }
