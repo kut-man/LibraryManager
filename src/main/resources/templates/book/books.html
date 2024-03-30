@@ -26,7 +26,8 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
             Author
         </th>
         <th scope="col" class="px-6 py-3">
-            <a th:href="@{/book?sort_by_year=true}">Year</a>
+            <a th:if="${asc != null && !asc}" th:href="@{/book?sort_by_year=true}">Year</a>
+            <a th:if="${asc == null || asc}" th:href="@{/book?sort_by_year=false}">Year</a>
         </th>
         <th scope="col" class="px-6 py-3">
             Actions

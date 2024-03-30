@@ -23,9 +23,11 @@ public class BookController {
     }
 
     @GetMapping
-    public String index(Model model, @RequestParam(name = "sort_by_year", required = false, defaultValue = "false") boolean sortByYear) {
-        if(sortByYear) model.addAttribute("books", booksService.showAllSortedByYear());
-        else model.addAttribute("books", booksService.showAll());
+    public String index(Model model, @RequestParam(name = "page", required = false) Integer page,
+                                  @RequestParam(name = "books_per_page", required = false) Integer perPage,
+                                  @RequestParam(name = "sort_by_year", required = false) Boolean asc) {
+        model.addAttribute("books", booksService.showAll(page, perPage, asc));
+        model.addAttribute("asc", asc);
         return "book/books";
     }
 
