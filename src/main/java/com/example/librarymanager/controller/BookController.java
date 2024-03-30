@@ -37,6 +37,18 @@ public class BookController {
         return "book/new";
     }
 
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam(name = "query", required = false) String query) {
+        if (query != null) {
+            model.addAttribute("books", booksService.searchByName(query));
+        }
+        else {
+            model.addAttribute("books", booksService.showAll());
+        }
+
+        return "book/search";
+    }
+
     @PostMapping()
     public String insert(@ModelAttribute("book") Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "book/new";

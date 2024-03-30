@@ -52,4 +52,12 @@ public class BooksService {
         }
         return booksRepository.findAll();
     }
+
+    public List<Book> showAll() {
+        return booksRepository.findAll();
+    }
+
+    public List<Book> searchByName(String query) {
+        return booksRepository.findByNameContainingIgnoreCase(query);
+    }
 }
