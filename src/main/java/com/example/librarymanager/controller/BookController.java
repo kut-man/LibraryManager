@@ -50,7 +50,7 @@ public class BookController {
     }
 
     @PostMapping()
-    public String insert(@ModelAttribute("book") Book book, BindingResult bindingResult) {
+    public String insert(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "book/new";
         booksService.save(book);
         return "redirect:/book";

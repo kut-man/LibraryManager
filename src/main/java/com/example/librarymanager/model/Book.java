@@ -23,7 +23,7 @@ public class Book {
     private String author;
 
     @Column(name = "year")
-    @Max(value = 2050, message = "Incorrect year")
+    @Max(value = 2030, message = "Incorrect year")
     @Min(value = 1000, message = "Incorrect year")
     private int year;
 
