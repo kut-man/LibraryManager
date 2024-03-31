@@ -17,11 +17,6 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
     </a>
 </div>
 
-
-
-
-
-
 <form th:method="GET" th:action="@{/book/search}" class="max-w-md mx-auto">
     <div class="flex relative z-0 w-full mb-5 group">
         <input name="query" type="text"
@@ -35,16 +30,9 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
     </div>
 </form>
 
+<p style="color: black" class="font-medium text-center" th:if="${books.isEmpty()}">Books Not Found</p>
 
-
-
-
-
-
-
-
-
-<table style="margin: auto;" class="w-fit text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+<table th:if="${!books.isEmpty()}" style="margin: auto;" class="w-fit text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
         <th scope="col" class="px-6 py-3">
@@ -57,7 +45,7 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
             Year
         </th>
         <th scope="col" class="px-6 py-3">
-            Actions
+            Belongs
         </th>
     </tr>
     </thead>
@@ -72,33 +60,17 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
             Author
         </td>
         <td th:text="${book.getYear()}" class="px-6 py-4">
-            Author
+            Year
         </td>
-        <td class="px-6 py-4">
-            <a th:href="@{/book/{id}/edit(id=${book.getId()})}">
-                <button type="button"
-                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
-                    Edit
-                </button>
-            </a>
-            <form style="display: inline" th:method="DELETE" th:action="@{/book/{id}(id=${book.getId()})}">
-                <button type="submit"
-                        class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
-                    Delete
-                </button>
-            </form>
+        <td th:if="${book.getOwner() != null}" th:text="${book.getOwner().getFullName()}" class="px-6 py-4">
+            Belongs
+        </td>
+        <td th:if="${book.getOwner() == null}" class="px-6 py-4">
+            Available
         </td>
     </tr>
     </tbody>
 </table>
-<div class="flex justify-center gap-2">
-    <a th:href="@{/book/new}">
-        <button type="button"
-                class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 my-6">
-            Add New
-        </button>
-    </a>
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 </body>
 </html>

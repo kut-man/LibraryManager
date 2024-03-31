@@ -17,13 +17,11 @@ import org.springframework.web.server.ResponseStatusException;
 public class PersonController {
 
     private final PeopleService peopleService;
-    private final BooksService booksService;
     private final PersonValidator personValidator;
 
     @Autowired
     public PersonController(PeopleService peopleService, BooksService booksService, PersonValidator personValidator) {
         this.peopleService = peopleService;
-        this.booksService = booksService;
         this.personValidator = personValidator;
     }
 
@@ -56,7 +54,6 @@ public class PersonController {
         }
         Person person = peopleService.find(id);
         model.addAttribute("person", person);
-        model.addAttribute("books", person.getBooks());
         return "person/show";
     }
 

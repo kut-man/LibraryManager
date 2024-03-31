@@ -47,9 +47,9 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
             </th>
         </tr>
         </thead>
-        <tbody th:each="book: ${books}">
+        <tbody th:each="book: ${person.getBooks()}">
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <td th:text="${book.getName()}" class="px-6 py-4">
+            <td th:text="${book.getName()}" th:style="${book.expired ? 'color: red' : ''}" class="px-6 py-4">
                 Birth Date
             </td>
         </tr>

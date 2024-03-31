@@ -75,7 +75,7 @@ public class BookController {
     @PatchMapping("/{id}")
     public String change(@PathVariable("id") int id, @ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "book/edit";
-        booksService.update(book);
+        booksService.update(book, id);
         return "redirect:/book";
     }
 
@@ -83,15 +83,13 @@ public class BookController {
     public String assign(@PathVariable("id") int id, @RequestParam("owner") int owner) {
         Book book = booksService.find(id);
         book.setOwner(peopleService.find(owner));
-        booksService.update(book);
+        booksService.update(book, id);
         return "redirect:/book/" + id;
     }
 
     @PatchMapping("/{id}/freed")
     public String freed(@PathVariable("id") int id, Model model) {
-        Book book = booksService.find(id);
-        book.setOwner(null);
-        booksService.update(book);
+        booksService.release(id);
         return "redirect:/book/" + id;
     }
 

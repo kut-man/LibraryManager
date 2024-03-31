@@ -1,11 +1,14 @@
 package com.example.librarymanager.services;
 
+import com.example.librarymanager.model.Book;
 import com.example.librarymanager.model.Person;
 import com.example.librarymanager.repositories.PeopleRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +42,14 @@ public class PeopleService {
     }
 
     public Person find(int id) {
-        return peopleRepository.findById(id).orElse(null);
+        Person person = peopleRepository.findById(id).orElse(null);
+        if (person != null) {
+            for (Book book : person.getBooks()){
+                long now = new Date().getTime();
+                boolean isExpired = (now - 864000000) > book.getCreatedAt().getTime();
+                book.setExpired(isExpired);
+            }
+        }
+        return person;
     }
 }

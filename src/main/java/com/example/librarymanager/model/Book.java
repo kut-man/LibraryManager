@@ -3,7 +3,7 @@ package com.example.librarymanager.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.Optional;
+import java.util.Date;
 
 @Entity
 public class Book {
@@ -26,6 +26,13 @@ public class Book {
     @Max(value = 2050, message = "Incorrect year")
     @Min(value = 1000, message = "Incorrect year")
     private int year;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Transient
+    private boolean expired;
 
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
@@ -72,11 +79,27 @@ public class Book {
         this.year = year;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Person getOwner() {
         return owner;
     }
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 }
