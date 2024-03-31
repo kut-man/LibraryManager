@@ -29,7 +29,7 @@ public class Book {
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Date takenAt;
 
     @Transient
     private boolean expired;
@@ -79,12 +79,12 @@ public class Book {
         this.year = year;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getTakenAt() {
+        return takenAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setTakenAt(Date takenAt) {
+        this.takenAt = takenAt;
     }
 
     public Person getOwner() {

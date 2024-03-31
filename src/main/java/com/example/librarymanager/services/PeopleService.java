@@ -46,7 +46,7 @@ public class PeopleService {
         if (person != null) {
             for (Book book : person.getBooks()){
                 long now = new Date().getTime();
-                boolean isExpired = (now - 864000000) > book.getCreatedAt().getTime();
+                boolean isExpired = (now - 864000000) > book.getTakenAt().getTime();
                 book.setExpired(isExpired);
             }
         }
