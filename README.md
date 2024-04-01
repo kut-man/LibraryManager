@@ -37,7 +37,7 @@ LibraryManager is a Java Spring project designed to manage a library system effi
    ```
 
 4. **Access the Application:**
-   - Once the application is running, open a web browser and go to `http://localhost:8080` to access the LibraryManager interface.
+   - Once the application is running, open a web browser and go to `http://localhost:8080/people` to access the LibraryManager interface.
 
 ## Usage
 
