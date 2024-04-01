@@ -1,6 +1,5 @@
 package com.example.librarymanager.controller;
 import com.example.librarymanager.model.Person;
-import com.example.librarymanager.services.BooksService;
 import com.example.librarymanager.services.PeopleService;
 import com.example.librarymanager.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class PersonController {
     private final PersonValidator personValidator;
 
     @Autowired
-    public PersonController(PeopleService peopleService, BooksService booksService, PersonValidator personValidator) {
+    public PersonController(PeopleService peopleService, PersonValidator personValidator) {
         this.peopleService = peopleService;
         this.personValidator = personValidator;
     }
@@ -64,9 +63,9 @@ public class PersonController {
     }
 
     @PatchMapping("/{id}")
-    public String change(@PathVariable("id") int id, @ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+    public String change(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "person/edit";
-        peopleService.update(id, person);
+        peopleService.update(person);
         return "redirect:/people";
     }
 

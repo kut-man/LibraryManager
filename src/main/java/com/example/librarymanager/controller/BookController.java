@@ -86,7 +86,7 @@ public class BookController {
     }
 
     @PatchMapping("/{id}/freed")
-    public String freed(@PathVariable("id") int id, Model model) {
+    public String freed(@PathVariable("id") int id) {
         booksService.release(id);
         return "redirect:/book/" + id;
     }

@@ -27,7 +27,7 @@ public class Book {
     @Min(value = 1000, message = "Incorrect year")
     private int year;
 
-    @Column(name = "created_at")
+    @Column(name = "taken_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date takenAt;
 
